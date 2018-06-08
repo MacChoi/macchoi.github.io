@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="manifest" href="./manifest.json"><link rel="shortcut icon" href="./favicon.ico"><title>React Redux Starter Kit</title><link href="./static/css/main.4366cbb4.css" rel="stylesheet"></head><body><div id="root"></div><script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script><script>// Initiaize firebase
+        var config = {
+            apiKey: "AIzaSyCS-NgT9Zo8B0QcxxN4KxlsvHY50j5WDso",
+            authDomain: "dextra-app.firebaseapp.com",
+            databaseURL: "https://dextra-app.firebaseio.com",
+            projectId: "dextra-app",
+            storageBucket: "dextra-app.appspot.com",
+            messagingSenderId: "460043985680"
+        };
+        firebase.initializeApp(config);
+
+        const messaging = firebase.messaging();
+
+        // SHOW NOTIFICATION EVEN WHEN APP IS IN FOREGROUND
+
+        messaging.onMessage(function(payload) {
+            console.log("Message received. ", payload);
+            self.navigator.serviceWorker.getRegistrations().then((registrations) => {
+                if (registrations.length === 0) {
+                    // No service workers registered
+                    return;
+                }
+                else{
+                    const notificationTitle = payload.notification.title;
+                    const notificationOptions = {
+                        body: payload.notification.body,
+                        icon: payload.notification.icon
+                    };
+                    // registration[1] refers to firebase service worker , registration[0] is create-react-app service worker
+                    registrations[1].showNotification(notificationTitle, notificationOptions);
+                }
+            });
+        });</script><script type="text/javascript" src="./static/js/main.01046d11.js"></script></body></html>
