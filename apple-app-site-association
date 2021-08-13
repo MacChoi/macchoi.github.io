@@ -1,2 +1,8 @@
-{ "applinks": { "apps": [], "details": [{ "appID": "FF9Z67K5Q5.com.dgbcap.finance", "paths": ["*"] }] } }
+{ "applinks": { "apps": [], "details": [{ "appID": "FF9Z67K5Q5.com.dgbcap.finance", "paths": ["*"] ,
+        "components": [
+          {
+            "/" : "",
+            "?": { "link": "something" }
+          }
+        ]}] } }
 
